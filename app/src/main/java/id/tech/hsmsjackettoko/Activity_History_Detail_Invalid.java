@@ -60,18 +60,14 @@ public class Activity_History_Detail_Invalid extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Cek pilihan jenis Invalidnya
                 if(radio_Sama.isChecked()){
                     status_kategori = "Transaksi Sama";
-//                    Toast.makeText(getApplicationContext(), "Validasi INVALID = TrxId" + transaction_id +
-//                            " & mason Id = " + mason_id + " Qty" + qty + "  kategori = " + , Toast.LENGTH_LONG).show();
                 }else{
                     status_kategori = "Transaksi Palsu";
-//                    Toast.makeText(getApplicationContext(), "Validasi INVALID = TrxId" + transaction_id +
-//                            " & mason Id = " + mason_id + " Qty" + qty + "  kategori = " + "Transaksi Palsu", Toast.LENGTH_LONG).show();
                 }
-
+                //eksekusi validasi sms
                 new AsyncTask_Validasi().execute();
-//                finish();
             }
         });
 
@@ -95,12 +91,16 @@ public class Activity_History_Detail_Invalid extends AppCompatActivity {
             } catch (Exception e) {
 
             }
+
+            //Open Database lokal
+            //set Confirm code 3 (INVALID) lalu update di db
             SQLiteDatabase db = SLite.openDatabase(getApplicationContext());
             ContentValues cv = new ContentValues();
             cv.put("confirmCode", "3");
             db.update("tbl_sms_mandor", cv, "trxId = ?", new String[]{transaction_id});
             db.close();
 
+            //kirim sms invalid dengan formatnya
             String mesage = "YA2#" + transaction_id + "#" +  qty + "#" +status_kategori;
             Log.e("Invalid", mesage);
             return Public_Functions.sendSMS(mesage);

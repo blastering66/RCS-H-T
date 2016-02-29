@@ -14,6 +14,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
 
+        //beri jeda waktu 30dtk tuk jalankan servicenya
         try{
             Thread.sleep(30000);
         }catch (InterruptedException e) {
@@ -21,6 +22,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             e.printStackTrace();
         }
 
+        //jalankan servicenya
         Intent notif_service = new Intent(context, StartSMSService.class);
         notif_service.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         notif_service.addFlags(Intent.FLAG_RECEIVER_NO_ABORT);

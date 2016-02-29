@@ -51,7 +51,7 @@ public class Activity_History_Expandable_Pending extends Fragment{
 
         sh = getActivity().getSharedPreferences("sh_sms", Context.MODE_PRIVATE);
         SQLiteDatabase db = SLite.openDatabase(getActivity());
-//        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
+        //Open Db dan Query sms mandornya
         final Cursor c = db.query("tbl_sms_mandor", new String[]{"trxId", "masonId", "qty", "confirmCode", "dateReceived"}
                 , null, null, null, null, "dateReceived DESC", null);
 
@@ -73,6 +73,8 @@ public class Activity_History_Expandable_Pending extends Fragment{
 
             boolean isYesterday = false;
             boolean isToday = false;
+
+            //Cek apakah hari ini, kemrin, atau sebelum2nya
             if (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
                     && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR)) {
                 isYesterday = true;

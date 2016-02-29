@@ -44,7 +44,7 @@ public class Activity_Inbox extends AppCompatActivity {
 
         data = new ArrayList<>();
 
-
+//Query db
         SQLiteDatabase db = SLite.openDatabase(getApplicationContext());
 //        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
         final Cursor c = db.query("tbl_sms_inbox", new String[] {"senderId", "bodyMessage", "dateReceived","viewed",

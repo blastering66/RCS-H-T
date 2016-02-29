@@ -43,13 +43,14 @@ public class Dialog_Input_Transaksi extends AppCompatActivity {
                 mTransId = ed_Trans_Id.getText().toString();
                 mQty = ed_Qty.getText().toString();
 
+                //validasi
                 if (mTransId.equals("") || mTransId.isEmpty()) {
                     ed_Trans_Id.setError("Harap di isi Trasaksi Id");
                 } else if (mQty.equals("") || mQty.isEmpty()) {
                     ed_Qty.setError("Harap ini kuantitas pembelian");
                 } else {
-//                    new AsyncTask_Konfirmasi().execute();
-                    Toast.makeText(getApplicationContext(), "YA#" + "Retailer Code" + "#" + mason_id + "#" + mQty, Toast.LENGTH_LONG).show();
+                    new AsyncTask_Konfirmasi().execute();
+//                    Toast.makeText(getApplicationContext(), "YA#" + "Retailer Code" + "#" + mason_id + "#" + mQty, Toast.LENGTH_LONG).show();
 
                 }
             }

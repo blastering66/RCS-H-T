@@ -35,22 +35,21 @@ public class SmsListener extends BroadcastReceiver {
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     msgs = new SmsMessage[pdus.length];
 
+                    // Dapatkan semua SMS single / multipart sms di append message bodynya
                     StringBuffer content_buff = new StringBuffer();
                     for (int i = 0; i < msgs.length; i++) {
                         msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                         String msgBody = msgs[i].getMessageBody();
                         content_buff.append(msgBody);
                     }
+
+                    //Get Message dr sms keseluruhan
                     String msgBody = content_buff.toString();
+                    //get Pengirim sms
                     msg_from = msgs[0].getOriginatingAddress();
 
-//                        msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-//                        msg_from = msgs[i].getOriginatingAddress();
-//                        String msgBody = msgs[i].getMessageBody();
-                    Log.e("toko SMS from = ", msg_from);
-                    Log.e("toko SMS message = ", msgBody);
 
-
+                    //Cek apakah dari SMS Holcim
                     if (msg_from.equals(Parameter_Collections.nomer_holcim) ||
                             msg_from.equals(Parameter_Collections.nomer_holcim_2)) {
 
@@ -192,6 +191,8 @@ public class SmsListener extends BroadcastReceiver {
                             }
 
                         } else if (patokanNews.equals("ama")) {
+                            //SMS News
+
                             SQLiteDatabase db = SLite.openDatabase(context);
                             ContentValues cv = new ContentValues();
                             cv.put("senderId", msg_from);
@@ -224,6 +225,8 @@ public class SmsListener extends BroadcastReceiver {
                             Log.e("TOKO SMS", "SMS biasa INBOX");
                         }
                     } else if (msgBody.contains("(Holcim")) {
+                        // SMS dari Long number
+
                         String patokanNews = msgBody.substring(msgBody.length() - 3, msgBody.length());
                         Log.e("patokan News = ", patokanNews);
 

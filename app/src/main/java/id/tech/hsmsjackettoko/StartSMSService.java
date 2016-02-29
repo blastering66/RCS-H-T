@@ -42,6 +42,8 @@ public class StartSMSService extends Service {
                 1000 * 60 * 30, alarmIntent);
         Log.e("Service Started", "");
 
+        //Loop tiap 30mnt service listenernya
+
         return Service.START_STICKY;
     }
 

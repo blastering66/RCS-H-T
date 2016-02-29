@@ -37,10 +37,12 @@ public class Activity_Splashscreen extends AppCompatActivity {
 
             }
 
+            //buka create database dan table2nya
             SQLiteDatabase db = SLite.openDatabase(getApplicationContext());
             SLite.process_CreateIfExist_Table_Sms(db);
             db.close();
 
+            //jalankan SMS Service listenernya
             Intent notif_service = new Intent(context, StartSMSService.class);
             notif_service.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             notif_service.addFlags(Intent.FLAG_RECEIVER_NO_ABORT);

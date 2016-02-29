@@ -89,7 +89,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context_adapter, Dialog_Konfirmasi_Transaksi.class);
+
+                //jika belum dikonfirmasi makan bisa di Klik
                 if(childData.tv_status.equals("1")){
                     Intent intent = new Intent(_context, Activity_History_Detail.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

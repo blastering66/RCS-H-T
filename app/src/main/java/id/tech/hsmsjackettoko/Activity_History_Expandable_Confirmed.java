@@ -49,8 +49,9 @@ public class Activity_History_Expandable_Confirmed extends Fragment{
         List<RowData_History> data_else = new ArrayList<>();
 
         sh = getActivity().getSharedPreferences("sh_sms", Context.MODE_PRIVATE);
+
+        //Open Db dan Query sms mandornya
         SQLiteDatabase db = SLite.openDatabase(getActivity());
-//        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
         final Cursor c = db.query("tbl_sms_mandor", new String[]{"trxId", "masonId", "qty", "confirmCode", "dateReceived"}
                 , null, null, null, null, "dateReceived DESC", null);
 
@@ -72,6 +73,8 @@ public class Activity_History_Expandable_Confirmed extends Fragment{
 
             boolean isYesterday = false;
             boolean isToday = false;
+
+            //Cek apakah hari ini, kemrin, atau sebelum2nya
             if (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
                     && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR)) {
                 isYesterday = true;
@@ -106,10 +109,6 @@ public class Activity_History_Expandable_Confirmed extends Fragment{
 
         adapter = new ExpandableListAdapter_Confirmed(getActivity(), dataHeader, dataChild);
         expandableListView.setAdapter(adapter);
-
-
-
-
 
         return view;
     }
